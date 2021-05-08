@@ -19,6 +19,6 @@
 | 名称                                                         | 笔记                                         | 备注 |
 | ------------------------------------------------------------ | -------------------------------------------- | ---- |
 | [HW2: shell](https://github.com/JYuniform64/MIT6.828LAB/tree/hw2) | [这里](https://uniform64.xyz/posts/a153216/) |      |
-|                                                              |                                              |      |
+| [HW3: system call](https://github.com/JYuniform64/MIT6.828LAB/tree/hw3) |                                              |      |
 |                                                              |                                              |      |
 
