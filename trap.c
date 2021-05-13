@@ -77,7 +77,24 @@ trap(struct trapframe *tf)
             cpuid(), tf->cs, tf->eip);
     lapiceoi();
     break;
-
+  case T_PGFLT:{
+    // cprintf("handling page fault!\n");
+    uint addrbegin = PGROUNDDOWN(rcr2());
+    uint addrend = myproc()->sz;
+    uint newsize = addrend;
+    // cprintf("alloc begin at:%x, end at %x\n", addrbegin, addrend);
+    if(addrend - addrbegin > 0){
+      if((newsize = allocuvm(myproc()->pgdir, addrbegin, addrend)) != 0){
+        myproc()->sz = newsize;
+        break;
+      }
+    } else if(addrend - addrbegin < 0){
+      if((newsize = deallocuvm(myproc()->pgdir, addrbegin, addrend)) != 0){
+        myproc()->sz = newsize;
+        break;
+      }
+    }
+  }
   //PAGEBREAK: 13
   default:
     if(myproc() == 0 || (tf->cs&3) == 0){
